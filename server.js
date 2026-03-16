@@ -1,17 +1,21 @@
 const express = require('express');
 const multer = require('multer');
 const OSS = require('ali-oss');
+const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+// Enable CORS
+app.use(cors());
 
 // Configure Aliyun OSS
 const client = new OSS({
-  region: 'your-region', // Replace with your OSS region
-  accessKeyId: 'your-access-key-id', // Replace with your access key
-  accessKeySecret: 'your-access-key-secret', // Replace with your access key secret
-  bucket: 'your-bucket-name' // Replace with your bucket name
+  region: process.env.OSS_REGION || 'your-region', // Use env var
+  accessKeyId: process.env.OSS_ACCESS_KEY_ID || 'your-access-key-id',
+  accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET || 'your-access-key-secret',
+  bucket: process.env.OSS_BUCKET || 'your-bucket-name'
 });
 
 // Configure multer for file uploads

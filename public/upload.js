@@ -1,3 +1,5 @@
+const backendUrl = 'https://your-backend-url.herokuapp.com'; // Replace with your deployed backend URL
+
 document.getElementById('uploadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const fileInput = document.getElementById('fileInput');
@@ -12,7 +14,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
   formData.append('file', fileInput.files[0]);
 
   try {
-    const response = await fetch('/upload', {
+    const response = await fetch(`${backendUrl}/upload`, {
       method: 'POST',
       body: formData
     });
